@@ -10,7 +10,7 @@ public class S07_Clipping : MonoBehaviour
     [SerializeField] private int clipMargin = 40;  // 캔버스 안쪽으로 이만큼 들어온 지점이 클리핑 경계
     [SerializeField]
     private List<Vector2> polygon = new List<Vector2> {
-        new Vector2(20, 180), new Vector2(236, 180), new Vector2(128, 16)
+        new Vector2(-10, 180), new Vector2(266, 180), new Vector2(128, 16)
     };
     [SerializeField] private Color fillColor = new Color(1f, 0.6f, 0.2f, 1f);
     [SerializeField] private Color marginOutlineColor = new Color(0.5f, 0.5f, 0.5f, 1f);
