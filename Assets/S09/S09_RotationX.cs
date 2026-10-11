@@ -30,7 +30,11 @@ public class S09_RotationX : MonoBehaviour
             verts[i] = FromHomogeneous(MultiplyMatrixVectorRaw(R, ToHomogeneous(baseVertices[i])));
         diamondMesh.SetVertices(verts);
 
-        }
+        Vector4 topVertex = ToHomogeneous(new Vector3(0.5f, 1f, 0.5f));
+        Vector3 transformedTopVertex = FromHomogeneous(MultiplyMatrixVectorRaw(R, topVertex));
+        Debug.Log($"꼭대기 정점 (0.5, 1, 0.5) 변환 결과: {transformedTopVertex}");
+
+    }
 
     // 참고: z축 회전 행렬 (e₃는 그대로, e₁과 e₂가 돎)
     float[,] RotationZMatrixRaw(float angleDegrees)
