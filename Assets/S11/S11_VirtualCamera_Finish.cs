@@ -64,7 +64,8 @@ public class S11_VirtualCamera_Finish : MonoBehaviour
     {
         Matrix4x4 Tinv = Matrix4x4.Translate(-cam.position);                  // T⁻¹: 이동을 되돌림
         Matrix4x4 Rinv = Matrix4x4.Rotate(Quaternion.Inverse(cam.rotation));  // R⁻¹: 회전을 되돌림
-        return Rinv * Tinv;                                                   // V = R⁻¹ × T⁻¹
+        //return Rinv * Tinv;                                                   // V = R⁻¹ × T⁻¹
+        return MultiplyMatrixMatrix(Rinv, Tinv); //과제 적용
     }
 
     // 카메라(VirtualCamera)가 본 장면을 캔버스에 와이어프레임으로 그림 (매 프레임 호출)
@@ -167,5 +168,19 @@ public class S11_VirtualCamera_Finish : MonoBehaviour
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);  // C: 카메라를 기준으로 잰 상자를 월드에 놓음
         Gizmos.DrawWireCube(center, extent);                      // near ~ far, 위아래 size, 좌우 size × aspect의 상자
         Gizmos.matrix = Matrix4x4.identity;                       // 다른 Gizmo에 영향이 없게 되돌림
+    }
+
+    //과제
+    Matrix4x4 MultiplyMatrixMatrix(Matrix4x4 A, Matrix4x4 B)
+    {
+        Matrix4x4 result = new Matrix4x4();
+
+        //행렬 B의 각각의 열에 행렬 A를 곱함
+        for (int i = 0; i < 4; i++)
+        {
+            result.SetColumn(i, A * B.GetColumn(i));
+        }
+
+        return result;
     }
 }
